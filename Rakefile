@@ -59,6 +59,7 @@ task :prepare_build_dir => GH_PAGES_REF
 # Fetch upstream changes on gh-pages branch
 task :sync_build_dir => :prepare_build_dir do
   cd BUILD_DIR do
+    sh "git chechout #{branch_name}"
     sh "git fetch #{remote_name} #{branch_name}"
     sh "git reset --hard #{remote_name}/#{branch_name}"
   end
