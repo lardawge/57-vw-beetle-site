@@ -18,7 +18,8 @@ import Lightbox from './bs5-lightbox'
 const options = {
 	keyboard: true,
 	size: 'fullscreen',
-  ride: false
+    constrain: false,
+    ride: false
 };
 
 document.querySelectorAll('[data-toggle="lightbox-c"]').forEach((el) => el.addEventListener('click', (e) => {

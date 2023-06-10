@@ -148,7 +148,7 @@ class Lightbox {
 				return `
 				<div class="carousel-item ${!i ? 'active' : ''}" style="min-height: 100px">
 					${spinner}
-					<div class="ratio ratio-16x9" style="background-color: #000;">${inner}</div>
+					<div class="ratio ratio-4x3" style="background-color: #000;">${inner}</div>
 					${caption}
 				</div>`;
 			})
