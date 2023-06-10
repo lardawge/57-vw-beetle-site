@@ -29,29 +29,29 @@ GH_PAGES_REF = File.join(BUILD_DIR, ".git/refs/remotes/#{remote_name}/#{branch_n
 
 directory BUILD_DIR
 
-# file GH_PAGES_REF => BUILD_DIR do
-#   repo_url = nil
+file GH_PAGES_REF => BUILD_DIR do
+  repo_url = nil
 
-#   cd PROJECT_ROOT do
-#     repo_url = `git config --get remote.#{remote_name}.url`.chomp
-#   end
+  cd PROJECT_ROOT do
+    repo_url = `git config --get remote.#{remote_name}.url`.chomp
+  end
 
-#   cd BUILD_DIR do
-#     sh "git init"
-#     sh "git remote add #{remote_name} #{repo_url}"
-#     sh "git fetch #{remote_name} #{branch_name}"
+  cd BUILD_DIR do
+    sh "git init"
+    sh "git remote add #{remote_name} #{repo_url}"
+    sh "git fetch #{remote_name} #{branch_name}"
 
-#     if `git branch -r` =~ /#{branch_name}/
-#       sh "git checkout #{branch_name}"
-#     else
-#       sh "git checkout --orphan #{branch_name}"
-#       FileUtils.touch("index.html")
-#       sh "git add ."
-#       sh "git commit -m \"initial gh-pages commit\""
-#       sh "git push #{remote_name} #{branch_name}"
-#     end
-#   end
-# end
+    if `git branch -r` =~ /#{branch_name}/
+      sh "git checkout #{branch_name}"
+    else
+      sh "git checkout --orphan #{branch_name}"
+      FileUtils.touch("index.html")
+      sh "git add ."
+      sh "git commit -m \"initial gh-pages commit\""
+      sh "git push #{remote_name} #{branch_name}"
+    end
+  end
+end
 
 # Alias to something meaningful
 task :prepare_build_dir => GH_PAGES_REF
