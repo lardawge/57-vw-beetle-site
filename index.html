@@ -1911,11 +1911,78 @@
       <p>
         Thanks for looking!
       </p>
+    </div>
+  </div>
+  <hr>
+   <div class="row">
+    <div class="col-10 offset-1 col-lg-8 offset-lg-2 text-start">
+      <h3 class="mb-4 text-center">Contact</h3>
+      <p class="text-muted">Serious inquiries only, please.</p>
 
-      <p class="alert alert-danger">
-        If you are interested in this car, please contact me through this ad on <a href="https://www.thesamba.com/vw/classifieds/detail.php?id=2758306">The Samba</a>. If the ad is not live, the car is not for sale.
-        This is the only way to contact me directly. If you are pointed to this page via Facebook or other and asked to contact via other means, it is a scam.
-      </p>
+      <div class="card rounded mb-5">
+        <div class="card-body contact-form-wrapper position-relative">
+            <div
+              id="successOverlay"
+              class="position-absolute top-0 start-0 w-100 h-100
+                    d-flex flex-column align-items-center justify-content-center
+                    bg-dark bg-opacity-75 text-white text-center px-3 rounded-2 d-none"
+              style="z-index: 10;"
+            >
+            <div class="p-4 rounded-3 bg-dark bg-opacity-75">
+              <h3 class="mb-3">Thank you for your inquiry!</h3>
+              <p class="mb-0">
+                I’ve received your message about the 1957 VW Beetle and will respond as soon as possible.
+              </p>
+            </div>
+          </div>
+
+          <div id="contactError" class="alert alert-danger d-none" role="alert">
+            Something went wrong sending your message. Please try again, or email me directly.
+          </div>
+
+          <form id="contactForm" action="https://formspree.io/f/xpwvlybq" method="POST" class="needs-validation" novalidate>
+            <input type="hidden" name="_subject" value="Inquiry from 57vwbeetle.com">
+            <input type="hidden" name="_language" value="en">
+
+            <div class="mb-2">
+              <label class="form-label">Name:</label>
+              <input class="form-control" type="text" name="name" required />
+              <div class="invalid-feedback">Please enter your name.</div>
+            </div>
+
+            <div class="mb-2">
+              <label class="form-label">Email:</label>
+              <input class="form-control" type="email" name="email" required />
+              <div class="invalid-feedback">Please enter a valid email address.</div>
+            </div>
+
+            <div class="mb-2">
+              <label for="phone" class="form-label">Phone (optional)</label>
+              <input type="tel" id="phone" name="phone" class="form-control" />
+            </div>
+
+            <div class="mb-4">
+              <label class="form-label">Message:</label>
+              <textarea class="form-control" name="message" rows="5" required></textarea>
+              <div class="invalid-feedback">Please include a message.</div>
+            </div>
+
+            <div style="display:none;">
+              <input type="text" name="_gotcha" tabindex="-1" autocomplete="off">
+            </div>
+
+            <!-- Cloudflare Turnstile widget -->
+            <div
+              class="cf-turnstile mb-3"
+              data-sitekey="0x4AAAAAACE_Vbmz1F2-KkqQ"
+              data-theme="light">
+            </div>
+
+            <button id="contactSubmitBtn" class="btn btn-primary">Send Inquiry</button>
+          </form>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>
@@ -1927,6 +1994,106 @@
     </div>
   </div>
 </footer>
+
+<!-- Turnstile script -->
+<script
+  src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+  async
+  defer>
+</script>
+
+<!-- Bootstrap client-side validation script -->
+<script>
+  (function () {
+    'use strict';
+
+    const form = document.getElementById('contactForm');
+    const submitBtn = document.getElementById('contactSubmitBtn');
+    const errorAlert = document.getElementById('contactError');
+    const successOverlay = document.getElementById('successOverlay');
+
+    if (!form) return;
+
+    form.addEventListener('submit', function (event) {
+      // Let browser/Bootstrap validation run first
+      if (!form.checkValidity()) {
+        event.preventDefault();
+        event.stopPropagation();
+        form.classList.add('was-validated');
+        return;
+      }
+
+      // Prevent default form POST (we’ll use fetch)
+      event.preventDefault();
+      event.stopPropagation();
+      form.classList.add('was-validated');
+
+      // Hide any previous error
+      if (errorAlert) {
+        errorAlert.classList.add('d-none');
+      }
+
+      // Disable submit button + show "Sending..."
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        const originalText = submitBtn.getAttribute('data-original-text') || 'Send Inquiry';
+        submitBtn.setAttribute('data-original-text', originalText);
+        submitBtn.textContent = 'Sending...';
+      }
+
+      // Build FormData (includes Turnstile's hidden field)
+      const formData = new FormData(form);
+
+      // Send via fetch to Formspree
+      fetch(form.action, {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json'
+        },
+        body: formData
+      })
+        .then(function (response) {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json();
+        })
+        .then(function (data) {
+          // On success: show thank-you overlay and optionally reset form
+          if (successOverlay) {
+            successOverlay.classList.remove('d-none');
+          }
+          form.reset();
+          form.classList.remove('was-validated');
+
+          // Re-enable button & restore label (in case user closes overlay and sends again)
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            const originalText = submitBtn.getAttribute('data-original-text') || 'Send Inquiry';
+            submitBtn.textContent = originalText;
+          }
+
+          // Reset Turnstile, if available
+          if (window.turnstile && typeof window.turnstile.reset === 'function') {
+            window.turnstile.reset();
+          }
+        })
+        .catch(function (error) {
+          console.error('Error submitting form:', error);
+          // Show error alert
+          if (errorAlert) {
+            errorAlert.classList.remove('d-none');
+          }
+          // Re-enable button
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            const originalText = submitBtn.getAttribute('data-original-text') || 'Send Inquiry';
+            submitBtn.textContent = originalText;
+          }
+        });
+    }, false);
+  })();
+</script>
 
     <script src="/site.min.js"></script>
   </body>
