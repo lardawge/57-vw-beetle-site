@@ -54,6 +54,18 @@ helpers do
     end
 end
 
+set :turnstile_site_key, '1x00000000000000000000AA' # CF test key, always passes
+
+configure :development do
+  # Local dev / middleman server
+  set :turnstile_site_key, '1x00000000000000000000AA' # Turnstile test key (always passes)
+end
+
+configure :build do
+  # Production build
+  set :turnstile_site_key, ENV.fetch('TURNSTILE_SITE_KEY', '0x4AAAAAACE_Vbmz1F2-KkqQ')
+end
+
 # Build-specific configuration
 # https://middlemanapp.com/advanced/configuration/#environment-specific-settings
 
