@@ -2,8 +2,8 @@
   <% (1..total).each do |i| %>
   <div class="col-lg-2 col-md-3 col-sm-3 col-6">
     <div class="img-thumb">
-      <a href="<%= gallery_file_name(i, main_image_name) %>.jpg" data-toggle="lightbox-c" data-gallery="example-gallery">
-        <img src="<%= gallery_file_name(i, thumb_image_name ||= main_image_name) %>.jpg" class="img-fluid">
+      <a href="<%= image_path(gallery_file_name(i, main_image_path)) %>" data-toggle="lightbox-c" data-gallery="example-gallery">
+        <img src="<%= image_path(gallery_file_name(i, thumb_image_path)) %>" class="img-fluid">
       </a>
     </div>
   </div>

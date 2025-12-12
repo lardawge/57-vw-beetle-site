@@ -42,7 +42,7 @@
   <hr>
   <div class="row">
     <div class="col text-start">
-      <img src="images/main-gallery/1957-vw-beetle-231.jpg" class="img-fluid">
+      <img src="<%= image_tag('main-gallery/1957-vw-beetle-231.jpg') %>" class="img-fluid">
       <ul>
         <li>Here you can see the birthdate of the car is 9/1/56 and exported on 9/3/56</li>
         <li>The color of L331 Horizon Blue was the factory color</li>
@@ -57,7 +57,7 @@
     <div class="col text-start">
       <h2>Engine Build Details</h2>
 
-      <%= partial "gallery", locals: { total: 12, main_image_name: 'images/engine-gallery/engine-assembly-', thumb_image_name: 'images/engine-gallery/engine-assembly-thmb-' } %>
+      <%= partial "gallery", locals: { total: 12, main_image_path: 'engine-gallery/engine-assembly-', thumb_image_path: 'engine-gallery/engine-assembly-thmb-' } %>
 
       <p>
         The goal for the engine rebuild was to give it a little more power to keep up with modern traffic while still retaining the stock look.
@@ -86,7 +86,7 @@
     </div>
   </div>
   <hr>
-  <%= partial "gallery", locals: { total: 239, main_image_name: 'images/main-gallery/1957-vw-beetle-', thumb_image_name: 'images/main-gallery/1957-vw-beetle-thmb-' } %>
+  <%= partial "gallery", locals: { total: 239, main_image_path: 'main-gallery/1957-vw-beetle-', thumb_image_path: 'main-gallery/1957-vw-beetle-thmb-' } %>
   <hr>
   <div class="row pt-3 pb-4">
     <div class="col-md-6">

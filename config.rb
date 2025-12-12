@@ -9,6 +9,7 @@ activate :external_pipeline,
   latency: 1
 
 activate :meta_tags
+activate :asset_hash
 
 configure :development do
   config[:css_dir] = ".tmp/dist"
@@ -40,7 +41,7 @@ page '/*.txt', layout: false
 
 helpers do
     def gallery_file_name(id, file_name)
-       "#{file_name}#{format_id(id)}"
+       "#{file_name}#{format_id(id)}.jpg"
     end
 
     def format_id(id)
