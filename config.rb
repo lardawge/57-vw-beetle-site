@@ -40,19 +40,10 @@ page '/*.txt', layout: false
 # https://middlemanapp.com/basics/helper-methods/
 
 helpers do
-    def gallery_file_name(id, file_name)
-       "#{file_name}#{format_id(id)}.jpg"
-    end
-
-    def format_id(id)
-        if id < 10
-            "00#{id}"
-        elsif id < 100
-            "0#{id}"
-        else
-            id
-        end
-    end
+  def gallery_count(gallery_path)
+    gallery_directory = "source/images/#{gallery_path}"
+    Dir.entries(gallery_directory).select { |entry| File.file?(File.join(gallery_directory, entry)) }.count / 2
+  end
 end
 
 set :turnstile_site_key, '1x00000000000000000000AA' # CF test key, always passes
