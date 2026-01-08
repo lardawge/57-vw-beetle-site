@@ -2,20 +2,20 @@
 @import "../../node_modules/bootstrap/scss/functions";
 
 // Color palette overrides - must come before variables import
-$primary: #6E7F73; // Muted Sage Green
+$primary: #88a6ba; // Muted Sage Green
 $body-bg: #FAF9F7; // Soft off-white
 $body-color: #2B2B2B; // Charcoal
-$headings-color: #6E7F73; // Sage green for headings
-$link-color: #6E7F73; // Sage green for links
-$link-hover-color: darken(#6E7F73, 10%);
-$hr-border-color: #6E7F73; // Warm Cream/Ivory for horizontal rules
+$headings-color: #88a6ba; // Sage green for headings
+$link-color: #88a6ba; // Sage green for links
+$link-hover-color: darken(#88a6ba, 10%);
+$hr-border-color: #88a6ba; // Warm Cream/Ivory for horizontal rules
 
 @import "../../node_modules/bootstrap/scss/variables";
 @import "../../node_modules/bootstrap/scss/variables-dark";
 
 // Add sage to theme colors map for utility classes
 $theme-colors: map-merge($theme-colors, (
-  "sage": #6E7F73
+  "sage": #88a6ba
 ));
 
 @import "../../node_modules/bootstrap/scss/maps";
@@ -154,24 +154,24 @@ hr {
 
 /* Ensure all headings use sage green (except when on sage backgrounds) */
 h1, h2, h3, h4, h5, h6 {
-  color: #6E7F73;
+  color: darken(#88a6ba, 10%);
 }
 
 /* Buttons with light text on sage green background */
 .btn-primary {
-  background-color: #6E7F73;
-  border-color: #6E7F73;
+  background-color: #88a6ba;
+  border-color: #88a6ba;
   color: #FAF9F7;
 
   &:hover, &:focus {
-    background-color: darken(#6E7F73, 5%);
-    border-color: darken(#6E7F73, 5%);
+    background-color: darken(#88a6ba, 5%);
+    border-color: darken(#88a6ba, 5%);
     color: #FAF9F7;
   }
 
   &:active {
-    background-color: darken(#6E7F73, 10%);
-    border-color: darken(#6E7F73, 10%);
+    background-color: darken(#88a6ba, 10%);
+    border-color: darken(#88a6ba, 10%);
     color: #FAF9F7;
   }
 }
