@@ -1,5 +1,5 @@
 // This is where it all goes :)
-import '../stylesheets/site-d55e254d.css.scss'
+import '../stylesheets/site-f60f4b31.css.scss'
 // import 'bootstrap/js/dist/alert';
 // import 'bootstrap/js/dist/button';
 import 'bootstrap/js/dist/carousel';
